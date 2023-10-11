@@ -1,0 +1,36 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}liverable{% endblock %}
+
+{% block content %}
+    <div class="container m-auto flex md:flex-row gap-10 flex-col justify-evenly items-center pt-10">
+    {% for item in phase %}
+        <div class="flex flex-col w-7/12">
+            <h3 class="mb-5">Ajouter un livrable</h3>
+            <p class="mb-5 text-indigo-700">Phase actuelle : Pahse {{ item.value }}</p>
+
+            <fieldset class="bg-white border border-gray-300 p-4 mt-10 w-full">
+
+                <legend class="">Livrables projet</legend>
+                {{ form_start(form) }}
+                <div class="grid grid-cols-2 gap-4">
+
+                    <div class="col-span-1 mb-5">
+                        {{ form_row(form.deliverable1File) }}
+                    </div>
+                    <div class="col-span-1 mb-5">
+                        {{ form_row(form.deliverable2File) }}
+                    </div>
+
+
+                </div>
+                <button type="submit" class="bg-blue-500  text-white py-2 px-4 rounded-md hover:bg-blue-600 ">Enregistrer</button>
+                {{ form_end(form) }}
+            </fieldset>
+
+        </div>
+        {{ include('partials/_sidebar_project.html.twig', {phase: item}) }}
+    {% endfor %}
+    </div>
+
+{% endblock %}

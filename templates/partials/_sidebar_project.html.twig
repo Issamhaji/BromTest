@@ -1,0 +1,7 @@
+
+
+<div class="bg-gray-300 p-10 flex flex-col justify-evenly">
+    <h3 class="mb-5 text-sky-950">Etat d'avancement du projet</h3>
+    <p class="mb-5 text-indigo-700">Phase cloturée: <span style="color: #1b9448">{{ phase.value - 1 }}</span>/6</p>
+    <p class="mb-5 text-indigo-700">Taux de réalisation du projet: {{ (((phase.value-1) * 100)/6)|number_format(2, '.', ',') }} %</p>
+</div>

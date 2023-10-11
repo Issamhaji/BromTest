@@ -1,0 +1,36 @@
+{% if item == null %}
+    <h1 class="text-sky-950 text-2xl font-semibold mb-4 lg:mb-0">
+        <a href="{{ url('app_index') }}">Bonjour Administrateur</a>
+    </h1>
+    <nav>
+        <ul class="space-x-4">
+            <li class="inline-block mr-2">
+                <a href="{{ url('app_index')  }}" class="text-sky-950 hover:underline">Ajouter un projet</a>
+            </li>
+            <li class="inline-block mr-2">
+                <a href="#" class="text-sky-950 hover:underline">Ajouter un livrable</a>
+            </li>
+            <li class="inline-block mr-2">
+                <a href="#" class="text-sky-950 hover:underline">Liste des livrables</a>
+            </li>
+        </ul>
+    </nav>
+{% else %}
+    <h1 class="text-sky-950 text-2xl font-semibold mb-4 lg:mb-0">
+        <a href="{{ url('app_project', {id: item.project.id}) }}">Bonjour Administrateur</a>
+    </h1>
+    <nav>
+        <ul class="space-x-4">
+            <li class="inline-block mr-2">
+                <a href="{{ url('app_index')  }}" class="text-sky-950 hover:underline">Ajouter un projet</a>
+            </li>
+            <li class="inline-block mr-2">
+                <a href="{{ url('app_deliverable', {projectId: item.project.id, phase: item.id}) }}" class="text-sky-950 hover:underline">Ajouter un livrable</a>
+            </li>
+            <li class="inline-block mr-2">
+                <a href="{{ url('app_list', {projectId: item.project.id}) }}" class="text-sky-950 hover:underline">Liste des livrables</a>
+            </li>
+        </ul>
+    </nav>
+
+{% endif %}

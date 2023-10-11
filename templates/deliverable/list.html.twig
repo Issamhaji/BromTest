@@ -1,0 +1,34 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}liverable{% endblock %}
+
+{% block content %}
+    <div class="container m-auto flex md:flex-row gap-10 flex-col justify-evenly items-center pt-10">
+        <div class="flex flex-col ">
+            <div class="flex flex-row justify-evenly mb-5">
+                <h3 class="text-sky-950 mb-5">Liste des livrables</h3>
+                {% if phase.value == 7 %}
+                    <div class="bg-red-500 p-5 justify-center"><h3 class="text-sky-950">This project is completed</h3></div>
+                {% endif %}
+            </div>
+
+            {% for item in deliverables %}
+                <fieldset class="bg-white border border-gray-300 p-4 mt-10">
+                    <legend class="">Phase {{ item.phase.value }}</legend>
+                    <p class="mb-5 "><span class="text-indigo-700">Les livrables ajoutes le: </span>{{ item.dateSoumission|date('d l Y') }}</p>
+                    <div class="flex flex-row gap-10">
+                        <p class="mb-5"><span class="basis-1/2 text-indigo-700">livrable 01:</span>
+                            <a href="{{ path('download_deliverable', {'id': item.id}) }}" class="text-indigo-700">{{ item.deliverable1Name }}</a>
+                        </p>
+                        <p class="mb-5"><span class="basis-1/2 text-indigo-700">livrable 02: </span>
+                            <a href="{{ path('download_deliverable', {'id': item.id, 'file': 'deliverable2'}) }}" class="text-indigo-700">{{ item.deliverable2Name }}</a>
+                        </p>
+                    </div>
+                </fieldset>
+            {% endfor %}
+
+        </div>
+        {{ include('partials/_sidebar_project.html.twig', {phase: phase}) }}
+    </div>
+
+{% endblock %}

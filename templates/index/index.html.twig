@@ -1,0 +1,119 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+    <div class="container m-auto flex md:flex-row gap-10 flex-col justify-evenly items-center pt-10">
+        <div class="flex flex-col w-7/12">
+            <h3 class="mb-5 text-sky-950">Ajouter un projet</h3>
+            {% if phase.value is null %}
+                <p class="mb-5 text-indigo-700">Phase actuelle : Pahsee 0</p>
+            {% elseif phase.value >= 6 %}
+                <p class="mb-5 text-red-700">Phase actuelle : Pahse completed</p>
+            {% else %}
+                    <p class="mb-5 text-indigo-700">Phase actuelle : Pahse {{ phase.value }}</p>
+            {% endif %}
+
+            <fieldset class="bg-white border border-gray-300 p-4 mt-10 w-full">
+
+                <legend class="">Informations projet</legend>
+                {{ form_start(form) }}
+                <div class="grid grid-cols-2 gap-4">
+                    {% for field in form %}
+                        <div class="col-span-1">
+                            {{ form_row(field) }}
+                        </div>
+                    {% endfor %}
+
+                </div>
+                <button type="submit" class="bg-blue-500  text-white py-2 px-4 rounded-md hover:bg-blue-600 ">Enregistrer</button>
+                {{ form_end(form) }}
+            </fieldset>
+
+        </div>
+
+        {% if phase.value is null %}
+            <div class="bg-gray-300 p-10 flex flex-col justify-evenly">
+                <h3 class="mb-5 text-sky-950">Etat d'avancement du projet</h3>
+                <p class="mb-5 text-indigo-700">Phase cloturees: 0/6</p>
+                <p class="mb-5 text-indigo-700">Taux de realistation du projet: 0 %</p>
+            </div>
+        {% else %}
+            {{ include('partials/_sidebar_project.html.twig', {phase: phase}) }}
+        {% endif %}
+    </div>
+
+{% endblock %}
+
+{% block js %}
+    <script>
+
+            // Static data for Region, Province, and Commune
+            var regionData = {
+            "Region 1": ["Province 1.1", "Province 1.2"],
+            "Region 2": ["Province 2.1", "Province 2.2"],
+        };
+
+            var provinceData = {
+            "Province 1.1": ["Commune 1.1.1", "Commune 1.1.2"],
+            "Province 1.2": ["Commune 1.2.1", "Commune 1.2.2"],
+            "Province 2.1": ["Commune 2.1.1", "Commune 2.1.2"],
+            "Province 2.2": ["Commune 2.2.1", "Commune 2.2.2"],
+        };
+
+            var communeData = {
+                "Province 1.1": ["Commune 1.1.1", "Commune 1.1.2"],
+                "Province 1.2": ["Commune 1.2.1", "Commune 1.2.2"],
+                "Province 2.1": ["Commune 2.1.1", "Commune 2.1.2"],
+                "Province 2.2": ["Commune 2.2.1", "Commune 2.2.2"],
+            };
+
+            var regionSelect = document.getElementById("project_region");
+            var provinceSelect = document.getElementById("project_province");
+            var communeSelect = document.getElementById("project_commune");
+
+            // Function to update Province options based on selected Region
+            function updateProvinceOptions() {
+            var selectedRegion = regionSelect.value;
+            var provinces = regionData[selectedRegion] || [];
+
+            provinceSelect.innerHTML = '';
+            communeSelect.innerHTML = '';
+
+            for (var i = 0; i < provinces.length; i++) {
+            var option = document.createElement("option");
+            option.value = provinces[i];
+            option.text = provinces[i];
+            provinceSelect.appendChild(option);
+        }
+        }
+
+            // Function to update Commune options based on selected Province
+            function updateCommuneOptions() {
+            var selectedProvince = provinceSelect.value;
+            var communes = communeData[selectedProvince] || [];
+
+            communeSelect.innerHTML = '';
+
+            for (var i = 0; i < communes.length; i++) {
+            var option = document.createElement("option");
+            option.value = communes[i];
+            option.text = communes[i];
+            communeSelect.appendChild(option);
+        }
+        }
+
+            // Add event listeners to Region and Province selects
+            regionSelect.addEventListener("change", updateProvinceOptions);
+            provinceSelect.addEventListener("change", updateCommuneOptions);
+
+            // Initial population of Province and Commune based on the selected Region
+            updateProvinceOptions();
+            updateCommuneOptions();
+    </script>
+
+
+
+{% endblock %}
+
+

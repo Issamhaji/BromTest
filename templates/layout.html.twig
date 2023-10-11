@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="bg-gray-300 p-4">
+        <div class="container m-auto flex flex-col lg:flex-row justify-between items-center">
+            {{ render(controller('App\\Controller\\DeliverableController::links')) }}
+
+        </div>
+    </div>
+
+
+    {% block content %}{% endblock %}
+{% endblock %}
+
+{% block js %}{% endblock %}
