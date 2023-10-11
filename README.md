@@ -14,7 +14,7 @@ Follow these steps to set up the project:
 # Clone the project
 git clone https://github.com/your-username/your-repo.git
 
-# Change to the project directory
+# Change to the project directory root
 cd your-repo
 
 # Install PHP dependencies
@@ -25,9 +25,8 @@ npm install
 ```
 ### Step 2: Configure your environment variables 
 
-# For MySQL: this my env.local 
+For MySQL: this my env.local 
 
-# DATABASE_URL="mysql://user:password@host:port/database"
 DATABASE_URL="mysql://root:@127.0.0.1:3306/urbanisme"
 
 ### Step 3: Set Up the Database
