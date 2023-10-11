@@ -18,10 +18,10 @@
                     <p class="mb-5 "><span class="text-indigo-700">Les livrables ajoutes le: </span>{{ item.dateSoumission|date('d l Y') }}</p>
                     <div class="flex flex-row gap-10">
                         <p class="mb-5"><span class="basis-1/2 text-indigo-700">livrable 01:</span>
-                            <a href="{{ path('download_deliverable', {'id': item.id}) }}" class="text-indigo-700">{{ item.deliverable1Name }}</a>
+                            <a class="text-black" href="{{ path('download_deliverable', {'id': item.id}) }}" class="text-indigo-700">{{ item.deliverable1Name }}</a>
                         </p>
                         <p class="mb-5"><span class="basis-1/2 text-indigo-700">livrable 02: </span>
-                            <a href="{{ path('download_deliverable', {'id': item.id, 'file': 'deliverable2'}) }}" class="text-indigo-700">{{ item.deliverable2Name }}</a>
+                            <a class="text-black" href="{{ path('download_deliverable', {'id': item.id, 'file': 'deliverable2'}) }}" class="text-indigo-700">{{ item.deliverable2Name }}</a>
                         </p>
                     </div>
                 </fieldset>
